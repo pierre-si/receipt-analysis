@@ -8,6 +8,6 @@ transformers==4.5.1
 detectron2==0.3 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.7/index.html
 seqeval==1.2.2
 
--e git+https://github.com/microsoft/unilm.git#egg=pkg&subdirectory=layoutlmft
+-e git+https://github.com/microsoft/unilm.git#egg=layoutlmft&subdirectory=layoutlmft
 
 easyocr
