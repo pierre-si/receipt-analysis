@@ -11,3 +11,6 @@ seqeval==1.2.2
 -e git+https://github.com/microsoft/unilm.git#egg=layoutlmft&subdirectory=layoutlmft
 
 easyocr
+
+# streamlit requires click 7, but a package above replaced it with click 8
+click==7.1.2
