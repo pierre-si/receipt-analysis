@@ -38,8 +38,10 @@ def run_app(img):
     left_column, right_column = st.columns(2)
     left_column.image(display_image, caption = "Selected Input")
 
+    print("Loading model.")
     handle = load_model()
-    print(img)
+    # print(img)
+    print("Processing image.")
     res = handle(img)
 
     # OCR bounding boxes
