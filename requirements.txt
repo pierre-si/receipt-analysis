@@ -1,5 +1,3 @@
-streamlit
-
 -f https://download.pytorch.org/whl/torch_stable.html
 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.7/index.html
 
@@ -18,3 +16,5 @@ easyocr
 # click==7.1.2
 
 s3fs==2022.2.0
+
+streamlit
