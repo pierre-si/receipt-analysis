@@ -6,6 +6,7 @@ import tempfile
 from PIL import Image, ImageDraw, ImageFont
 from numpy.core.fromnumeric import size
 import streamlit as st
+import s3fs
 
 from app_engine import AppEngine
 
@@ -120,5 +121,13 @@ def main():
             tfile.write(f.read())
             st.sidebar.write('Please wait for the magic to happen! This may take up to a minute.')
             run_app(tfile.name)
+
+# Create connection object.
+# `anon=False` means not anonymous, i.e. it uses access keys to pull data.
+fs = s3fs.S3FileSystem(anon=False)
+
+@st.cache(ttl=86400)
+def download_model():
+    fs.get("streamlit4/receipt-analysis", "output/v2_local_cpu", recursive=True)
 
 main()
