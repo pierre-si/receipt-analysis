@@ -1,5 +1,6 @@
 # Helper (engine) for the Streamlit app. Basically the same as layoutlmv2_serve (ray)
 from io import BytesIO
+from pathlib import Path
 
 from PIL import Image
 import torch
@@ -10,6 +11,8 @@ from transformers import (
     AutoTokenizer,
 )
 import easyocr
+import s3fs
+import streamlit as st
 
 from layoutlmft.data.utils import load_image, normalize_bbox
 from layoutlmft.data import DataCollatorForKeyValueExtraction
@@ -21,6 +24,12 @@ label_to_id = {i: i for i in range(55)}
 
 class AppEngine():
     def __init__(self, model_name = "output/v2_local_cpu/", num_labels = 55):
+        if not (Path(model_name)/"pytorch_model.bin").exists():
+            st.sidebar.write('Downloading the model. This may take a few minutes.')
+            # `anon=False` means not anonymous, i.e. it uses access keys to pull data.
+            fs = s3fs.S3FileSystem(anon=False)
+            fs.get("streamlit4/receipt-analysis", model_name, recursive=True)
+
         self.config = AutoConfig.from_pretrained(
             model_name,
             num_labels=num_labels,
