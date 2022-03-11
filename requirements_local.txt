@@ -10,7 +10,6 @@ seqeval==1.2.2
 
 -e git+https://github.com/microsoft/unilm.git#egg=layoutlmft&subdirectory=layoutlmft
 
-
 s3fs==2022.2.0
 streamlit
 easyocr
