@@ -100,8 +100,10 @@ class AppEngine():
         return tokenized_inputs
     
     def __call__(self, img_path):
-        read = self.reader.readtext(str(img_path)) # OCR
-
+        # EasyOCR
+        print("Running EasyOCR.")
+        read = self.reader.readtext(str(img_path))
+        print("Loading image.")
         image, size = load_image(img_path)
         example = {
             "id": ["0", "1"],
@@ -110,6 +112,7 @@ class AppEngine():
             "image": [image, image],
             "ner_tags": [[1]*len(read), [1]*len(read)]
         }
+        print("Collecting bboxes.")
         for segment in read:
             # skip excerpts with low confidence 
             if segment[2] < 0.1:
@@ -122,6 +125,7 @@ class AppEngine():
         # tokenize_and_align does not work with datasets of size 1, so we add the parsed data twice…
         example["bboxes"].append(example["bboxes"][0])
         example["tokens"].append(example["tokens"][0])
+        print("Instantiating the dataset")
         inference_dataset =  Dataset.from_dict(example)
         remove_columns = inference_dataset.column_names
         inference_dataset = inference_dataset.map(
@@ -139,6 +143,7 @@ class AppEngine():
         att_mask = batch["attention_mask"]
         token_type_ids = batch["token_type_ids"]
 
+        print("Running LayoutLM")
         with torch.no_grad():
             y = self.model(input_ids, bbox, image, att_mask, token_type_ids)
 

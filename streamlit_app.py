@@ -58,7 +58,8 @@ def run_app(img):
 
     # LayoutLM predictions
     draw = ImageDraw.Draw(display_image, "RGBA")
-    font = ImageFont.truetype("arial.ttf", 20)
+    # font = ImageFont.truetype("arial.ttf", 20)
+    font = ImageFont.truetype("LiberationSans-Regular.ttf", 20)
     label2color = {'MENU':'blue', "SUB_TOTAL":'green', 'TOTAL':'orange', }
 
     # bboxes = res["x"]["bboxes"][0]
@@ -67,7 +68,7 @@ def run_app(img):
     for box, pred in zip(bboxes, y):
         label = LABELS[pred]
         draw.rectangle(box, outline=label2color[label.split(".")[0][2:]], width=1)
-        draw.text((box[0] - 30, box[1] - 10), label, fill=label2color[label.split(".")[0][2:]], font=font)
+        draw.text((box[0] - 30, box[1] - 20), label, fill=label2color[label.split(".")[0][2:]], font=font)
     st.image(display_image, caption = "Classification results")
 
 

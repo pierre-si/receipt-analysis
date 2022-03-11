@@ -5,15 +5,14 @@ datasets==1.6.2
 torch==1.7.1+cu101
 torchvision==0.8.2+cu101
 transformers==4.5.1
-detectron2==0.3 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.7/index.html
+detectron2==0.3
 seqeval==1.2.2
 
 -e git+https://github.com/microsoft/unilm.git#egg=layoutlmft&subdirectory=layoutlmft
 
 easyocr
-
-# streamlit requires click 7, but a package above replaced it with click 8
-# click==7.1.2
+# newer versions of opencv make easyocr crash
+opencv-python-headless==4.5.4.60
 
 s3fs==2022.2.0
 
