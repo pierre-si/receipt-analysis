@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  app:
+    image: receipt-analysis
+    container_name: receipt-analysis
+    ports: 
+    - 80:80
+    build: 
+      dockerfile: ./Dockerfile
+      context: .
+    # volumes:
+    # - ./app:/app/
