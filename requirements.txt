@@ -11,8 +11,8 @@ seqeval==1.2.2
 -e git+https://github.com/microsoft/unilm.git#egg=layoutlmft&subdirectory=layoutlmft
 
 s3fs==2022.2.0
-streamlit
-easyocr
+streamlit==1.7
+easyocr==1.4
 # newer versions of opencv make easyocr crash
 opencv-python-headless==4.5.4.60
 
