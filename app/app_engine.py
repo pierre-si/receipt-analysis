@@ -17,13 +17,17 @@ import streamlit as st
 from layoutlmft.data.utils import load_image, normalize_bbox
 from layoutlmft.data import DataCollatorForKeyValueExtraction
 #%%
+DEFAULT_MODELS_BASE_DIR = 'app/output/'
+MODEL_DIR = 'v2_local_cpu'
+
+#%%
 text_column_name = "tokens"
 label_column_name = "ner_tags"
 padding = "max_length"
 label_to_id = {i: i for i in range(55)}
 
 class AppEngine():
-    def __init__(self, model_name = "output/v2_local_cpu/", num_labels = 55):
+    def __init__(self, model_name = DEFAULT_MODELS_BASE_DIR+MODEL_DIR, num_labels = 55):
         if not (Path(model_name)/"pytorch_model.bin").exists():
             st.sidebar.write('Downloading the model. This may take a few minutes.')
             # `anon=False` means not anonymous, i.e. it uses access keys to pull data.

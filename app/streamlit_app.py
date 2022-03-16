@@ -9,7 +9,7 @@ import streamlit as st
 
 from app_engine import AppEngine
 
-DEFAULT_DATA_BASE_DIR = 'data'
+DEFAULT_DATA_BASE_DIR = 'app/data'
 IMAGE_DIR = 'demo_scan'
 
 # Constants for sidebar dropdown

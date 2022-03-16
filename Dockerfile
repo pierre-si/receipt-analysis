@@ -4,7 +4,7 @@ FROM python:3.7
 WORKDIR /
 
 # copy the requirements.txt file into our image.
-COPY requirements_local.txt requirements.txt
+COPY requirements.txt requirements.txt
 
 # git and gcc are included in the default python image.
 # RUN apt-get update \
@@ -14,10 +14,9 @@ COPY requirements_local.txt requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
 # takes all the files located in the app directory and copies them into the image
-# COPY app/ .
+COPY app/ app/
 
 EXPOSE 80
 
-WORKDIR /app
 CMD ["sh", "-c", "streamlit run --browser.serverAddress 0.0.0.0 --server.enableCORS False --server.port 80 /app/streamlit_app.py" ]
 
