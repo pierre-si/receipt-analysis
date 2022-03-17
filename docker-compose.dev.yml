@@ -9,3 +9,7 @@ services:
     build: 
       dockerfile: ./Dockerfile
       context: .
+    volumes:
+    - ./app:/app/
+    - ~/.aws:/root/.aws:ro
+    - ~/.passwd-s3fs:/root/.passwd-s3fs:ro
